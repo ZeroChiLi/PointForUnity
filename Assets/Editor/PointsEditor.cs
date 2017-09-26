@@ -6,7 +6,6 @@ using UnityEngine;
 [CustomEditor(typeof(Points))]
 internal class PointsEditor : Editor
 {
-    //private Points Target { get { return target as Points; } }
     private Points Target;
     private static string[] excludeFields = null;
     private ReorderableList pointList;
@@ -24,8 +23,6 @@ internal class PointsEditor : Editor
         pointList = null;
 
         guiStyle = new GUIStyle();
-        guiStyle.normal.textColor = Target.apperance.indexFontColor;
-        guiStyle.fontSize = Target.apperance.indexFontSize;
         guiStyle.alignment = TextAnchor.MiddleCenter;
 
         labelSize = new Vector2(EditorGUIUtility.singleLineHeight * 2, EditorGUIUtility.singleLineHeight * 2);
@@ -72,7 +69,6 @@ internal class PointsEditor : Editor
         Rect r = new Rect(rect.position, numberDimension);
         r.y += numberDimension.y - r.height / 2;
         Color color = GUI.color;
-        // GUI.color = Target.m_Appearance.pathColor;
         if (GUI.Button(r, new GUIContent(index.ToString(), "Go to the waypoint in the scene view")))
         {
             pointList.index = index;
@@ -119,6 +115,21 @@ internal class PointsEditor : Editor
     }
 
     /// <summary>
+    /// 根据是否使用屏幕大小，获取点大小
+    /// </summary>
+    /// <param name="position">点的位置</param>
+    /// <returns>点的实际大小</returns>
+    private float GetPointSize(Vector3 position)
+    {
+        float pointSize;
+        if (Target.apperance.useScreenSize)
+            pointSize = HandleUtility.GetHandleSize(position) * Target.apperance.pointSize / 2f;
+        else
+            pointSize = Target.apperance.pointSize * 4f;
+        return pointSize;
+    }
+
+    /// <summary>
     /// 绘制选择对象的控制
     /// </summary>
     /// <param name="i">点对象索引值</param>
@@ -126,23 +137,24 @@ internal class PointsEditor : Editor
     {
         if (Event.current.button != 0)
             return;
-        Vector3 pos = Target.points[i].position;
-        float size = HandleUtility.GetHandleSize(pos) * Target.apperance.pointSize;
-
-        DrawPointAxisLine(i, Vector3.right, Color.red);
-        DrawPointAxisLine(i, Vector3.up, Color.green);
-        DrawPointAxisLine(i, Vector3.forward, Color.blue);
+        Vector3 pos = Target[i].position;
 
         Handles.color = Target.apperance.pointColor;
-        if (Handles.Button(pos, Quaternion.identity, size, size, Handles.SphereHandleCap) && pointList.index != i)
+        if (Handles.Button(pos, Quaternion.identity, GetPointSize(pos), GetPointSize(pos), Handles.SphereHandleCap) && pointList.index != i)
         {
             pointList.index = i;
             InternalEditorUtility.RepaintAllViews();
         }
 
+        DrawPointAxisLine(i, Vector3.right, Color.red);
+        DrawPointAxisLine(i, Vector3.up, Color.green);
+        DrawPointAxisLine(i, Vector3.forward, Color.blue);
+
         Handles.BeginGUI();
         GUILayout.BeginArea(LabelRect(pos));
-        GUILayout.Label(new GUIContent(i.ToString(), "Point " + i), guiStyle);
+        guiStyle.normal.textColor = Target.apperance.indexFontColor;
+        guiStyle.fontSize = Target.apperance.indexFontSize;
+        GUILayout.Label(new GUIContent(i.ToString(), string.Format("Point {0}\nPosition: {1}\nRotation: {2}", i, Target[i].position, Target[i].eulerAngles)), guiStyle);
         GUILayout.EndArea();
         Handles.EndGUI();
     }
@@ -169,7 +181,11 @@ internal class PointsEditor : Editor
     private void DrawPointAxisLine(int i, Vector3 dir, Color color)
     {
         Handles.color = color;
-        Handles.DrawLine(Target.points[i].position, Target.points[i].position + Target.points[i].Rotation * dir * Target.apperance.axisLength);
+        if (Target.apperance.useScreenSize)
+            Handles.DrawLine(Target[i].position, Target[i].position + Target[i].Rotation * dir * Target.apperance.axisLength * GetPointSize(Target[i].position));
+        else
+            Handles.DrawLine(Target[i].position, Target[i].position + Target[i].Rotation * dir * Target.apperance.axisLength);
+
     }
 
     /// <summary>
@@ -181,11 +197,11 @@ internal class PointsEditor : Editor
     {
         if (type != Tool.Move && type != Tool.Rotate)
             return;
-        PointBase point = Target.points[i];
+        Handles.color = Target.apperance.selectedColor;
+        PointBase point = Target[i];
         EditorGUI.BeginChangeCheck();
         Quaternion rotation = (Tools.pivotRotation == PivotRotation.Local) ? Quaternion.identity : Quaternion.Inverse(Target.transform.rotation);
-        float size = HandleUtility.GetHandleSize(point.position) * Target.apperance.pointSize;
-        Handles.SphereHandleCap(0, point.position, rotation, size, EventType.Repaint);
+        Handles.SphereHandleCap(0, point.position, rotation, GetPointSize(point.position), EventType.Repaint);
 
         Quaternion newRotation = new Quaternion();
         Vector3 pos = new Vector3();
@@ -206,7 +222,7 @@ internal class PointsEditor : Editor
                 Undo.RecordObject(target, "Move Point");
                 point.position = pos;
             }
-            Target.points[i] = point;
+            Target[i] = point;
         }
     }
 }
