@@ -9,4 +9,6 @@ public sealed class PointAppearance
     [Range(10,20)]
     public int indexFontSize = 13;
     public Color indexFontColor = Color.black;
+    [Range(1,20)]
+    public float axisLength = 10f;
 }
