@@ -159,7 +159,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Editor\PointApperaranceEditor.cs" />
+    <Compile Include="Assets\Editor\PointAnnulusAreaEditor.cs" />
     <Compile Include="Assets\Editor\PointsEditor.cs" />
   </ItemGroup>
   <ItemGroup>

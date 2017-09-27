@@ -114,10 +114,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Examples\Scirpts\ChickenManager.cs" />
+    <Compile Include="Assets\Examples\Scirpts\SpawnAndNavigation.cs" />
+    <Compile Include="Assets\Scripts\Point.cs" />
+    <Compile Include="Assets\Scripts\PointAnnulusArea.cs" />
     <Compile Include="Assets\Scripts\PointAppearance.cs" />
     <Compile Include="Assets\Scripts\PointAreaBase.cs" />
-    <Compile Include="Assets\Scripts\PointBase.cs" />
-    <Compile Include="Assets\Scripts\PointCircleArea.cs" />
     <Compile Include="Assets\Scripts\Points.cs" />
   </ItemGroup>
   <ItemGroup>

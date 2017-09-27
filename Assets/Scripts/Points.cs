@@ -96,4 +96,24 @@ public class Points : MonoBehaviour
         if (index >= 0 && index < Count)
             points.RemoveAt(index);
     }
+
+    /// <summary>
+    /// 获取点位置的世界坐标
+    /// </summary>
+    /// <param name="p">点对象</param>
+    /// <returns>点位置的世界坐标</returns>
+    public Vector3 GetWorldPosition(Point p)
+    {
+        return transform.TransformPoint(p.position);
+    }
+
+    /// <summary>
+    /// 获取点旋转的世界坐标
+    /// </summary>
+    /// <param name="p">点对象</param>
+    /// <returns>点旋转的世界坐标</returns>
+    public Quaternion GetWorldRotation(Point p)
+    {
+        return transform.rotation * p.rotation;
+    }
 }
