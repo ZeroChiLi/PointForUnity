@@ -498,33 +498,34 @@ MonoBehaviour:
     showGizoms: 1
     useScreenSize: 0
     selectedColor: {r: 0.9044118, g: 0.5, b: 1, a: 1}
-    pointSize: 0.6
+    pointSize: 0.42
     pointColor: {r: 0.57612455, g: 0.2794118, b: 1, a: 1}
     indexFontSize: 20
     indexFontColor: {r: 0, g: 0, b: 0, a: 1}
     axisLength: 3
+    focusSize: 50
   points:
-  - position: {x: -21.17244, y: -11.698202, z: 2.257623}
-    eulerAngles: {x: 53.860336, y: 335.77432, z: 230.53519}
-  - position: {x: -20.805859, y: 3.6682682, z: -19.162592}
+  - position: {x: -20.385262, y: 5.2489905, z: -19.256046}
     eulerAngles: {x: 11.920925, y: 299.85452, z: 20.621395}
-  - position: {x: 12.1, y: 25.513075, z: 61.05524}
-    eulerAngles: {x: 330.1026, y: 347.71332, z: 0.038794175}
-  - position: {x: 0, y: 0, z: 23.907478}
-    eulerAngles: {x: 44.80103, y: 20.147552, z: 104.76094}
+  - position: {x: -21.17244, y: 12.9, z: 2.257623}
+    eulerAngles: {x: 0, y: 0, z: 0}
+  - position: {x: 19.684086, y: 4.107233, z: -9.2025795}
+    eulerAngles: {x: 4.775364, y: 5.467928, z: 11.7218075}
+  - position: {x: 0, y: 6.13, z: 23.475105}
+    eulerAngles: {x: 63.678673, y: 280.2521, z: 203.08508}
 --- !u!4 &1566979765
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1566979763}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.021949116, y: -0.051940057, z: 0.13083161, w: 0.98979974}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 3.27, y: -5.58, z: 14.9}
 --- !u!1 &1584639483
 GameObject:
   m_ObjectHideFlags: 0

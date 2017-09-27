@@ -7,7 +7,6 @@ using UnityEngine;
 internal class PointsEditor : Editor
 {
     private Points Target;
-    private static string[] excludeFields = null;
     private ReorderableList pointList;
 
     private Vector2 numberDimension;
@@ -59,7 +58,6 @@ internal class PointsEditor : Editor
     /// <param name="focused">是否聚焦了</param>
     private void DrawPointElement(Rect rect, int index, bool selected, bool focused)
     {
-        PointBase def = new PointBase();
         numberDimension = GUI.skin.button.CalcSize(new GUIContent("999"));
         labelDimension = GUI.skin.label.CalcSize(new GUIContent("Rotation "));
 
@@ -68,15 +66,13 @@ internal class PointsEditor : Editor
 
         Rect r = new Rect(rect.position, numberDimension);
         r.y += numberDimension.y - r.height / 2;
-        Color color = GUI.color;
-        if (GUI.Button(r, new GUIContent(index.ToString(), "Go to the waypoint in the scene view")))
+        if (GUI.Button(r, new GUIContent(index.ToString(), "Go to the point in the scene view")))
         {
             pointList.index = index;
-            //SceneView.lastActiveSceneView.pivot = Target.EvaluatePosition(index);
-            //SceneView.lastActiveSceneView.size = 3;
+            SceneView.lastActiveSceneView.pivot = Target.transform.rotation * Target[index].position;
+            SceneView.lastActiveSceneView.size = Target.apperance.focusSize * Target.apperance.pointSize;
             SceneView.lastActiveSceneView.Repaint();
         }
-        GUI.color = color;
 
         r = new Rect(rect.position, labelDimension);
         r.x += hSpace + numberDimension.x;

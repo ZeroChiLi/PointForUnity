@@ -14,4 +14,6 @@ public sealed class PointAppearance
     public Color indexFontColor = Color.black;
     [Range(0.1f, 5f)]
     public float axisLength = 3f;
+    [Range(10f, 50f)]
+    public float focusSize = 20f;
 }
