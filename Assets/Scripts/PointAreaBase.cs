@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class PointAreaBase : PointBase
+public abstract class PointAreaBase : Point
 {
     public enum Orientation { Same, Random, Rule }
     public Orientation orientation;
@@ -24,6 +24,6 @@ public abstract class PointAreaBase : PointBase
 
     public abstract Vector3 GetRandomPositionInArea();
     public abstract Vector3 GetRandomPositionInEgde();
-    public abstract PointBase GetRandomPointInArea();
-    public abstract PointBase GetRandomPointInEgde();
+    public abstract Point GetRandomPointInArea();
+    public abstract Point GetRandomPointInEgde();
 }

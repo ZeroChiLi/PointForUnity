@@ -9,6 +9,7 @@ internal class PointsEditor : Editor
     private Points Target;
     private ReorderableList pointList;
 
+    private bool expandedPoints;
     private Vector2 numberDimension;
     private Vector2 labelDimension;
     private const float vSpace = 2;
@@ -33,7 +34,9 @@ internal class PointsEditor : Editor
             SetupPointList();
         serializedObject.Update();
         DrawPropertiesExcluding(serializedObject, "m_Script", "points");
-        pointList.DoLayoutList();
+        expandedPoints = EditorGUILayout.Foldout(expandedPoints, "Points Details");
+        if (expandedPoints)
+            pointList.DoLayoutList();
         serializedObject.ApplyModifiedProperties();
     }
 
@@ -83,7 +86,8 @@ internal class PointsEditor : Editor
 
         r = new Rect(rect.position, labelDimension);
         r.y += numberDimension.y + vSpace;
-        r.x += hSpace + numberDimension.x; r.width = labelDimension.x;
+        r.x += hSpace + numberDimension.x;
+        r.width = labelDimension.x;
         EditorGUI.LabelField(r, "Rotation");
         r.x += hSpace + r.width;
         r.width = rect.width - (numberDimension.x + hSpace + r.width + hSpace);
@@ -100,10 +104,10 @@ internal class PointsEditor : Editor
         Color colorOld = Handles.color;
         Handles.matrix = Target.transform.localToWorldMatrix;
 
-        for (int i = 0; i < Target.points.Length; ++i)
+        for (int i = 0; i < Target.Count; ++i)
             DrawSelectionHandle(i);
 
-        if (pointList.index >= 0 && pointList.index < Target.points.Length)
+        if (pointList.index >= 0 && pointList.index < Target.Count)
             DrawControl(pointList.index, Tools.current);
 
         Handles.color = colorOld;
@@ -178,9 +182,9 @@ internal class PointsEditor : Editor
     {
         Handles.color = color;
         if (Target.apperance.useScreenSize)
-            Handles.DrawLine(Target[i].position, Target[i].position + Target[i].Rotation * dir * Target.apperance.axisLength * GetPointSize(Target[i].position));
+            Handles.DrawLine(Target[i].position, Target[i].position + Target[i].rotation * dir * Target.apperance.axisLength * GetPointSize(Target[i].position));
         else
-            Handles.DrawLine(Target[i].position, Target[i].position + Target[i].Rotation * dir * Target.apperance.axisLength);
+            Handles.DrawLine(Target[i].position, Target[i].position + Target[i].rotation * dir * Target.apperance.axisLength);
 
     }
 
@@ -194,7 +198,7 @@ internal class PointsEditor : Editor
         if (type != Tool.Move && type != Tool.Rotate)
             return;
         Handles.color = Target.apperance.selectedColor;
-        PointBase point = Target[i];
+        Point point = Target[i];
         EditorGUI.BeginChangeCheck();
         Quaternion rotation = (Tools.pivotRotation == PivotRotation.Local) ? Quaternion.identity : Quaternion.Inverse(Target.transform.rotation);
         Handles.SphereHandleCap(0, point.position, rotation, GetPointSize(point.position), EventType.Repaint);
@@ -202,7 +206,7 @@ internal class PointsEditor : Editor
         Quaternion newRotation = new Quaternion();
         Vector3 pos = new Vector3();
         if (type == Tool.Rotate)
-            newRotation = Handles.RotationHandle(point.Rotation, point.position);
+            newRotation = Handles.RotationHandle(point.rotation, point.position);
         else if (type == Tool.Move)
             pos = Handles.PositionHandle(point.position, rotation);
 
@@ -211,7 +215,7 @@ internal class PointsEditor : Editor
             if (type == Tool.Rotate)
             {
                 Undo.RecordObject(target, "Rotate Point");
-                point.Rotation = newRotation;
+                point.rotation = newRotation;
             }
             else if (type == Tool.Move)
             {

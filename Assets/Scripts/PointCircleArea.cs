@@ -16,15 +16,15 @@ public class PointCircleArea : PointAreaBase
         return new Vector3(x * radius, Mathf.Sqrt(1 - x * x) * radius, 0);
     }
 
-    public override PointBase GetRandomPointInArea()
+    public override Point GetRandomPointInArea()
     {
         Vector3 pos = GetRandomPositionInArea();
-        return new PointBase(pos, GetAngleByPosition(pos));
+        return new Point(pos, GetAngleByPosition(pos));
     }
 
-    public override PointBase GetRandomPointInEgde()
+    public override Point GetRandomPointInEgde()
     {
         Vector3 pos = GetRandomPositionInEgde();
-        return new PointBase(pos, GetAngleByPosition(pos));
+        return new Point(pos, GetAngleByPosition(pos));
     }
 }
