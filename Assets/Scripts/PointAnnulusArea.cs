@@ -2,13 +2,12 @@
 
 public class PointAnnulusArea : PointAreaBase
 {
-    [HideInInspector]
+    public PointAnnulusAreaAppearance appearance = new PointAnnulusAreaAppearance();
     private float minRadius = 5f;
-    [HideInInspector]
     private float maxRadius = 10f;
 
-    public float MinRadius { get { return minRadius; } }
-    public float MaxRadius { get { return maxRadius; } }
+    public float MinRadius { get { return minRadius; } set { minRadius = Mathf.Max(0,Mathf.Min(value, maxRadius)); } }
+    public float MaxRadius { get { return maxRadius; } set { maxRadius = Mathf.Max(value, minRadius); } }
 
     private float LerpFromAnnulus(float value)
     {
