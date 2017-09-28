@@ -117,6 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 120572269}
   - component: {fileID: 120572268}
+  - component: {fileID: 120572270}
   m_Layer: 0
   m_Name: PointAnnulusArea
   m_TagString: Untagged
@@ -135,13 +136,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de5a63d20844c474cac7a01560fe8295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientationType: 0
-  orientationEulerAngle: {x: 0, y: 0, z: 0}
+  orientationType: 1
+  orientationEulerAngle: {x: 0, y: 180, z: 0}
   appearance:
     innerCircleColor: {r: 0, g: 0, b: 0, a: 0.19607843}
     outerCircleColor: {r: 1, g: 1, b: 1, a: 0.19607843}
     innerEdgeColor: {r: 1, g: 0, b: 0, a: 1}
-    outerEdgeColor: {r: 0, g: 1, b: 0, a: 1}
+    outerEdgeColor: {r: 0, g: 0, b: 1, a: 1}
+  minRadius: 9.98325
+  maxRadius: 14.643343
 --- !u!4 &120572269
 Transform:
   m_ObjectHideFlags: 0
@@ -155,6 +158,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &120572270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 120572267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c652a86f8378d7d469ef82cb89732e28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  area: {fileID: 120572268}
+  prefab: {fileID: 1069252933942776, guid: 7745835f82594b747abc0b37008a94b1, type: 2}
+  amount: 10
+  changeTime: 3
 --- !u!1 &271072077
 GameObject:
   m_ObjectHideFlags: 0
@@ -1335,47 +1353,4 @@ Transform:
   - {fileID: 271072078}
   m_Father: {fileID: 916915546}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2058006672
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 2058006674}
-  - component: {fileID: 2058006673}
-  m_Layer: 0
-  m_Name: Spawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2058006673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2058006672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c652a86f8378d7d469ef82cb89732e28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  area: {fileID: 120572268}
-  prefab: {fileID: 1069252933942776, guid: 7745835f82594b747abc0b37008a94b1, type: 2}
-  amount: 10
---- !u!4 &2058006674
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2058006672}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.891328, y: 3.379158, z: 5.620042}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

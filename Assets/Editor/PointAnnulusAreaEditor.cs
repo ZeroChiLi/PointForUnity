@@ -22,6 +22,7 @@ public class PointAnnulusAreaEditor : Editor
         DrawPropertiesExcluding(serializedObject, "m_Script");
         GetProperties();
         serializedObject.ApplyModifiedProperties();
+        SceneView.RepaintAll();
     }
 
     private void GetProperties()
@@ -87,6 +88,8 @@ public class PointAnnulusAreaEditor : Editor
         Handles.color = color;
         Handles.CircleHandleCap(0, Target.transform.position, Quaternion.LookRotation(Target.transform.up), radius, EventType.Repaint);
         EditorGUI.BeginChangeCheck();
+        if (radius <= 0)
+            radius = 0.1f;
         return Handles.ScaleSlider(radius, Target.transform.position, direction, Target.transform.rotation, HandleUtility.GetHandleSize(Target.transform.position), 0.5f);
     }
 }

@@ -3,35 +3,34 @@
 public class PointAnnulusArea : PointAreaBase
 {
     public PointAnnulusAreaAppearance appearance = new PointAnnulusAreaAppearance();
-    private float minRadius = 5f;
-    private float maxRadius = 10f;
+    [SerializeField, HideInInspector]
+    private float minRadius;
+    [SerializeField, HideInInspector]
+    private float maxRadius;
 
-    public float MinRadius { get { return minRadius; } set { minRadius = Mathf.Max(0,Mathf.Min(value, maxRadius)); } }
+    public float MinRadius { get { return minRadius; } set { minRadius = Mathf.Max(0, Mathf.Min(value, maxRadius)); } }
     public float MaxRadius { get { return maxRadius; } set { maxRadius = Mathf.Max(value, minRadius); } }
 
-    private float LerpFromAnnulus(float value)
+
+    public Vector3 GetRandomPositionByRadius(float radius)
     {
-        return value >= 0 ? Mathf.Lerp(MinRadius, MaxRadius, value) : Mathf.Lerp(-MaxRadius, -MinRadius, value);
+        float angle = Random.Range(0, 360);
+        return new Vector3(radius * Mathf.Cos(angle), 0, radius * Mathf.Sin(angle));
     }
 
     public override Vector3 GetRandomPositionInArea()
     {
-        Vector2 randomPos = Random.insideUnitCircle;
-        return new Vector3(LerpFromAnnulus(randomPos.x), 0, LerpFromAnnulus(randomPos.y));
+        return GetRandomPositionByRadius(Random.Range(minRadius, maxRadius));
     }
 
     public override Vector3 GetRandomPositionInEdge()
     {
-        float x = Random.value;
-        x *= Random.value > 0.5 ? 1 : -1;
-        return new Vector3(x * maxRadius, 0, Mathf.Sqrt(1 - x * x) * maxRadius);
+        return GetRandomPositionByRadius(maxRadius);
     }
 
     public Vector3 GetRandomPositionInMinEdge()
     {
-        float x = Random.value;
-        x *= Random.value > 0.5 ? 1 : -1;
-        return new Vector3(x * minRadius, 0, Mathf.Sqrt(1 - x * x) * minRadius);
+        return GetRandomPositionByRadius(minRadius);
     }
 
     public override Point GetRandomPointInArea()
