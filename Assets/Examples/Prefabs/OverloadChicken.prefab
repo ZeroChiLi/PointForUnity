@@ -870,6 +870,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8bbaea381d966b488f840b1dd4212c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoMoveForward: 0
+  speed: 0.02
   animator: {fileID: 95461102905694458}
   navMesh: {fileID: 195412297951670490}
 --- !u!135 &135142214068807978

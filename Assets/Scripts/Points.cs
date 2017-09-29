@@ -3,6 +3,24 @@ using UnityEngine;
 
 public class Points : MonoBehaviour
 {
+    [System.Serializable]
+    public sealed class PointAppearance
+    {
+        public bool showGizoms = true;
+        public bool useScreenSize;
+        public Color selectedColor = Color.yellow;
+        [Range(0.1f, 1f)]
+        public float pointSize = 0.6f;
+        public Color pointColor = Color.white;
+        [Range(10, 30)]
+        public int indexFontSize = 20;
+        public Color indexFontColor = Color.black;
+        [Range(0.1f, 5f)]
+        public float axisLength = 3f;
+        [Range(10f, 50f)]
+        public float focusSize = 20f;
+    }
+
     public PointAppearance apperance = new PointAppearance();
     public int currentIndex = -1;
     public bool looped = true;
