@@ -4,9 +4,9 @@ public class PointAnnulusArea : PointAreaBase
 {
     public PointAnnulusAreaAppearance appearance = new PointAnnulusAreaAppearance();
     [SerializeField, HideInInspector]
-    private float minRadius;
+    private float minRadius = 5f;
     [SerializeField, HideInInspector]
-    private float maxRadius;
+    private float maxRadius = 10f;
 
     public float MinRadius { get { return minRadius; } set { minRadius = Mathf.Max(0, Mathf.Min(value, maxRadius)); } }
     public float MaxRadius { get { return maxRadius; } set { maxRadius = Mathf.Max(value, minRadius); } }

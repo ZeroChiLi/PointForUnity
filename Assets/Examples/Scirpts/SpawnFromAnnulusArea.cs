@@ -18,6 +18,7 @@ public class SpawnFromAnnulusArea : MonoBehaviour
         for (int i = 0; i < amount; i++)
         {
             objList.Add(Instantiate(prefab));
+            objList[i].GetComponent<ChickenManager>().autoMoveForward = true;
             temP = area.GetRandomPointInArea().GetWorldSpacePoint(transform);
             objList[i].transform.position = temP.position;
             objList[i].transform.rotation = temP.rotation;
