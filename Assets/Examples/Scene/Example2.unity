@@ -169,8 +169,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c652a86f8378d7d469ef82cb89732e28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inEgde: 0
+  autoMove: 0
   area: {fileID: 120572268}
-  prefab: {fileID: 1069252933942776, guid: 7745835f82594b747abc0b37008a94b1, type: 2}
+  chickenPrefab: {fileID: 1069252933942776, guid: 7745835f82594b747abc0b37008a94b1,
+    type: 2}
   amount: 10
   changeTime: 3
 --- !u!1 &419135808

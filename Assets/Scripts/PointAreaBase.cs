@@ -7,6 +7,10 @@ public abstract class PointAreaBase : MonoBehaviour
     public Vector3 orientationEulerAngle;
     public Quaternion orientationAngle { get { return Quaternion.Euler(orientationEulerAngle); } set { orientationEulerAngle = value.eulerAngles; } }
 
+    /// <summary>
+    /// 通过位置偏移量计算旋转角
+    /// </summary>
+    /// <param name="offset">偏移量</param>
     public virtual Quaternion GetAngleByPosition(Vector3 offset)
     {
         switch (orientationType)
@@ -28,8 +32,23 @@ public abstract class PointAreaBase : MonoBehaviour
         return Quaternion.identity;
     }
 
+    /// <summary>
+    /// 获取区域内随机位置
+    /// </summary>
     public abstract Vector3 GetRandomPositionInArea();
+
+    /// <summary>
+    /// 获取边缘上的随机位置
+    /// </summary>
     public abstract Vector3 GetRandomPositionInEdge();
+
+    /// <summary>
+    /// 获取区域内随机的点
+    /// </summary>
     public abstract Point GetRandomPointInArea();
+
+    /// <summary>
+    /// 获取边缘上随机的点
+    /// </summary>
     public abstract Point GetRandomPointInEdge();
 }

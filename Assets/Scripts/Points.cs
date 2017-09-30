@@ -6,7 +6,7 @@ public class Points : MonoBehaviour
     [System.Serializable]
     public sealed class PointAppearance
     {
-        public bool showGizoms = true;
+        public bool keepGizoms = true;
         public bool useScreenSize;
         public Color selectedColor = Color.yellow;
         [Range(0.1f, 1f)]
@@ -31,7 +31,7 @@ public class Points : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (!apperance.showGizoms)
+        if (!apperance.keepGizoms)
             return;
         Gizmos.color = apperance.pointColor;
         Gizmos.matrix = transform.localToWorldMatrix;
