@@ -115,4 +115,27 @@ public class Points : MonoBehaviour
             points.RemoveAt(index);
     }
 
+    /// <summary>
+    /// 获取点位置的世界坐标
+    /// </summary>
+    public Vector3 GetWorldPosition(Point p)
+    {
+        return transform.TransformPoint(p.position);
+    }
+
+    /// <summary>
+    /// 获取点旋转的世界坐标
+    /// </summary>
+    public Quaternion GetWorldRotation(Point p)
+    {
+        return transform.rotation * p.rotation;
+    }
+
+    /// <summary>
+    /// 获取世界坐标下的点
+    /// </summary>
+    public Point GetWorldSpacePoint(Point p)
+    {
+        return new Point(GetWorldPosition(p), GetWorldRotation(p));
+    }
 }

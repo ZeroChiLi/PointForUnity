@@ -7,8 +7,8 @@ public class PointAnnulusArea : PointAreaBase
     {
         public Color innerCircleColor = new Color(0, 0, 0, 0.2f);
         public Color outerCircleColor = new Color(1, 1, 1, 0.2f);
-        public Color innerEdgeColor = Color.red;
-        public Color outerEdgeColor = Color.blue;
+        public Color innerEdgeColor = Color.cyan;
+        public Color outerEdgeColor = Color.magenta;
     }
 
     public PointAnnulusAreaAppearance appearance = new PointAnnulusAreaAppearance();
@@ -58,5 +58,10 @@ public class PointAnnulusArea : PointAreaBase
     {
         Vector3 pos = GetRandomPositionInMinEdge();
         return new Point(pos, GetAngleByPosition(pos));
+    }
+
+    public override Vector3 GetWorldSpacePosition(Point p)
+    {
+        return transform.rotation * p.position + transform.position;
     }
 }

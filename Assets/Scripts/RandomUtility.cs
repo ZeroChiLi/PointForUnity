@@ -5,7 +5,7 @@ static public class RandomUtility
     static public float sign { get { return Mathf.Sign(Random.value - 0.5f); } }
 
     /// <summary>
-    /// 获取随机索引，weight为每个索引的权重，不能为负。失败返回-1
+    /// 获取随机索引，weight为每个索引的权重（自动取绝对值）。失败返回-1
     /// </summary>
     /// <param name="weight">权重值</param>
     /// <returns>返回随机索引</returns>
@@ -13,7 +13,10 @@ static public class RandomUtility
     {
         float sum = 0f;
         for (int i = 0; i < weight.Length; i++)
+        {
+            weight[i] = Mathf.Abs(weight[i]);
             sum += weight[i];
+        }
         float value = Random.Range(0f, sum);
         for (int i = 0; i < weight.Length; i++)
         {

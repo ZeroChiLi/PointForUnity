@@ -37,7 +37,7 @@ public class SpawnChickenTest : MonoBehaviour
 
     private void ResetChicken(ChickenManager c)
     {
-        temP = inEgde ? area.GetRandomPointInEdge().GetWorldSpacePoint(transform) : area.GetRandomPointInArea().GetWorldSpacePoint(transform);
+        temP = inEgde ? area.GetWorldSpacePoint(area.GetRandomPointInEdge()) : area.GetWorldSpacePoint(area.GetRandomPointInArea());
         c.transform.position = temP.position;
         c.transform.rotation = temP.rotation;
         c.autoMoveForward = autoMove;

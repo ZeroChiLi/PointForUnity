@@ -897,7 +897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   apperance:
-    showGizoms: 1
+    keepGizoms: 1
     useScreenSize: 0
     selectedColor: {r: 0.9044118, g: 0.5, b: 1, a: 1}
     pointSize: 0.42
@@ -909,9 +909,9 @@ MonoBehaviour:
   currentIndex: 0
   looped: 1
   points:
-  - position: {x: 19.651302, y: 0, z: -2.479185}
+  - position: {x: 12.907723, y: 0, z: -2.479185}
     eulerAngles: {x: 0, y: -86.21, z: 0}
-  - position: {x: -4.972245, y: 0, z: -16.083513}
+  - position: {x: 0.048005104, y: 0, z: -13.031222}
     eulerAngles: {x: 0, y: 12.29, z: 0}
   - position: {x: -10.817728, y: 0, z: 2.257623}
     eulerAngles: {x: 0, y: 102.71, z: 0}
@@ -1379,7 +1379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   points: {fileID: 1566979764}
   prefab: {fileID: 1069252933942776, guid: 7745835f82594b747abc0b37008a94b1, type: 2}
-  isRandom: 0
+  isRandom: 1
   changeNextWayPointTime: 5
 --- !u!4 &1985262648
 Transform:

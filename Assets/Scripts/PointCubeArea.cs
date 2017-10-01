@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PointCubeArea : PointAreaBase
@@ -21,7 +22,7 @@ public class PointCubeArea : PointAreaBase
 
     public override Vector3 GetRandomPositionInArea()
     {
-        return new Vector3(RandomUtility.Extents(ActualExtents.x), RandomUtility.Extents(ActualExtents.y), RandomUtility.Extents(ActualExtents.z));
+        return new Vector3(RandomUtility.Extents(Extents.x), RandomUtility.Extents(Extents.y), RandomUtility.Extents(Extents.z));
     }
 
     public override Vector3 GetRandomPositionInEdge()

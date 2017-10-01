@@ -59,7 +59,7 @@ public class PointAnnulusAreaEditor : Editor
     /// </summary>
     private void DrawMinMaxScaleHandle()
     {
-        scaleValue = DrawScaleHandle(Target.MinRadius, Target.appearance.innerEdgeColor, Target.transform.right);
+        scaleValue = DrawScaleHandle(Target.MinRadius, Target.appearance.innerEdgeColor, -Target.transform.right);
         if (EditorGUI.EndChangeCheck())
         {
             Undo.RecordObject(target, "Scale Min Radius");
@@ -67,7 +67,7 @@ public class PointAnnulusAreaEditor : Editor
             Repaint();
         }
 
-        scaleValue = DrawScaleHandle(Target.MaxRadius, Target.appearance.outerEdgeColor, Target.transform.forward);
+        scaleValue = DrawScaleHandle(Target.MaxRadius, Target.appearance.outerEdgeColor, -Target.transform.forward);
         if (EditorGUI.EndChangeCheck())
         {
             Undo.RecordObject(target, "Scale Max Radius");

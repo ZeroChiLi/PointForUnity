@@ -51,4 +51,28 @@ public abstract class PointAreaBase : MonoBehaviour
     /// 获取边缘上随机的点
     /// </summary>
     public abstract Point GetRandomPointInEdge();
+
+    /// <summary>
+    /// 获取世界空间下点的位置
+    /// </summary>
+    public virtual Vector3 GetWorldSpacePosition(Point p)
+    {
+        return transform.TransformPoint(p.position);
+    }
+
+    /// <summary>
+    /// 获取世界空间下点的旋转
+    /// </summary>
+    public virtual Quaternion GetWorldSpaceRotation(Point p)
+    {
+        return transform.rotation * p.rotation;
+    }
+
+    /// <summary>
+    /// 获取世界坐标下的点
+    /// </summary>
+    public virtual Point GetWorldSpacePoint(Point p)
+    {
+        return new Point(GetWorldSpacePosition(p), GetWorldSpaceRotation(p));
+    }
 }

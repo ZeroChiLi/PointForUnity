@@ -17,8 +17,8 @@ public class SpawnAndNavigation : MonoBehaviour
         for (int i = 0; i < points.Count; i++)
         {
             chickenList.Add(Instantiate(prefab, transform).GetComponent<ChickenManager>());
-            chickenList[i].transform.position = points[i].GetWorldPosition(points.transform);
-            chickenList[i].transform.rotation = points[i].GetWorldRotation(points.transform);
+            chickenList[i].transform.position = points.GetWorldPosition(points[i]);
+            chickenList[i].transform.rotation = points.GetWorldRotation(points[i]);
         }
     }
 
@@ -31,9 +31,9 @@ public class SpawnAndNavigation : MonoBehaviour
             for (int i = 0; i < chickenList.Count; i++)
             {
                 if (isRandom)
-                    chickenList[i].SetNextWayPoint(points.GetRandomPoint().GetWorldPosition(points.transform));
+                    chickenList[i].SetNextWayPoint(points.GetWorldPosition(points.GetRandomPoint()));
                 else if (nextPoint != null)
-                    chickenList[i].SetNextWayPoint(nextPoint.GetWorldPosition(points.transform));
+                    chickenList[i].SetNextWayPoint(points.GetWorldPosition(nextPoint));
             }
             elapsed = changeNextWayPointTime;
         }
