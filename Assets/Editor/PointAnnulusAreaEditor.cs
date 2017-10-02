@@ -49,9 +49,11 @@ public class PointAnnulusAreaEditor : Editor
     private void DrawAnnulusArea()
     {
         Handles.color = Target.appearance.outerCircleColor;
-        Handles.DrawSolidDisc(Target.transform.position, Target.transform.up, Target.MaxRadius);
+        Handles.DrawSolidArc(Target.transform.position, Target.transform.up, Target.transform.right, -Target.angle, Target.MaxRadius);
+        //Handles.DrawSolidDisc(Target.transform.position, Target.transform.up, Target.MaxRadius);
         Handles.color = Target.appearance.innerCircleColor;
-        Handles.DrawSolidDisc(Target.transform.position, Target.transform.up, Target.MinRadius);
+        //Handles.DrawSolidDisc(Target.transform.position, Target.transform.up, Target.MinRadius);
+        Handles.DrawSolidArc(Target.transform.position, Target.transform.up, Target.transform.right, -Target.angle, Target.MinRadius);
     }
 
     /// <summary>
@@ -83,7 +85,7 @@ public class PointAnnulusAreaEditor : Editor
     /// <param name="color">颜色</param>
     /// <param name="direction">方向</param>
     /// <returns>返回缩放值</returns>
-    private float DrawScaleHandle(float radius,Color color,Vector3 direction)
+    private float DrawScaleHandle(float radius, Color color, Vector3 direction)
     {
         Handles.color = color;
         Handles.CircleHandleCap(0, Target.transform.position, Quaternion.LookRotation(Target.transform.up), radius, EventType.Repaint);

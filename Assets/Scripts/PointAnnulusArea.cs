@@ -16,6 +16,8 @@ public class PointAnnulusArea : PointAreaBase
     private float minRadius = 5f;
     [SerializeField, HideInInspector]
     private float maxRadius = 10f;
+    [Range(0.01f, 360f)]
+    public float angle = 60f;
 
     public float MinRadius { get { return minRadius; } set { minRadius = Mathf.Max(0, Mathf.Min(value, maxRadius)); } }
     public float MaxRadius { get { return maxRadius; } set { maxRadius = Mathf.Max(value, minRadius); } }
@@ -23,8 +25,8 @@ public class PointAnnulusArea : PointAreaBase
 
     public Vector3 GetRandomPositionByRadius(float radius)
     {
-        float angle = Random.Range(0, 360);
-        return new Vector3(radius * Mathf.Cos(angle), 0, radius * Mathf.Sin(angle));
+        float theta = Random.Range(0, angle);
+        return new Vector3(radius * Mathf.Cos(theta * Mathf.PI / 180), 0, radius * Mathf.Sin(theta * Mathf.PI / 180));
     }
 
     public override Vector3 GetRandomPositionInArea()
