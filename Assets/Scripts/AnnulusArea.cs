@@ -1,21 +1,21 @@
 ﻿using UnityEngine;
 
-public class PointAnnulusArea : PointAreaBase
+public class AnnulusArea : AreaBase
 {
     [System.Serializable]
-    public class PointAnnulusAreaAppearance
+    public class Appearance
     {
-        public Color innerCircleColor = new Color(0, 0, 0, 0.2f);
-        public Color outerCircleColor = new Color(1, 1, 1, 0.2f);
+        public Color innerColor = new Color(0, 0, 0, 0.2f);
+        public Color outerColor = new Color(1, 1, 1, 0.2f);
         public Color innerEdgeColor = Color.cyan;
         public Color outerEdgeColor = Color.magenta;
     }
 
-    public PointAnnulusAreaAppearance appearance = new PointAnnulusAreaAppearance();
+    public Appearance appearance = new Appearance();
     [SerializeField, HideInInspector]
-    private float minRadius = 5f;
+    protected float minRadius = 5f;
     [SerializeField, HideInInspector]
-    private float maxRadius = 10f;
+    protected float maxRadius = 10f;
     [Range(0.01f, 360f)]
     public float angle = 60f;
 
@@ -23,10 +23,10 @@ public class PointAnnulusArea : PointAreaBase
     public float MaxRadius { get { return maxRadius; } set { maxRadius = Mathf.Max(value, minRadius); } }
 
 
-    public Vector3 GetRandomPositionByRadius(float radius)
+    public virtual Vector3 GetRandomPositionByRadius(float radius)
     {
-        float theta = Random.Range(0, angle);
-        return new Vector3(radius * Mathf.Cos(theta * Mathf.PI / 180), 0, radius * Mathf.Sin(theta * Mathf.PI / 180));
+        float f = Random.Range(0, angle) * Mathf.PI / 180;
+        return new Vector3(radius * Mathf.Cos(f), 0, radius * Mathf.Sin(f));
     }
 
     public override Vector3 GetRandomPositionInArea()
@@ -39,7 +39,7 @@ public class PointAnnulusArea : PointAreaBase
         return GetRandomPositionByRadius(maxRadius);
     }
 
-    public Vector3 GetRandomPositionInMinEdge()
+    public virtual Vector3 GetRandomPositionInMinEdge()
     {
         return GetRandomPositionByRadius(minRadius);
     }

@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PointCubeArea : PointAreaBase
+public class CubeArea : AreaBase
 {
     [System.Serializable]
-    public class PointCubeAreaAppearance
+    public class Appearance
     {
         public Color edgeColor = Color.white;
         public Color surfaceColor = new Color(1, 1, 1, 0.5f);
     }
 
-    public PointCubeAreaAppearance apperance = new PointCubeAreaAppearance();
+    public Appearance appearance = new Appearance();
     [SerializeField, HideInInspector]
     private Vector3 size = Vector3.one * 10f;
     public Vector3 Size { get { return size; } set { size = new Vector3(Mathf.Max(0, value.x), Mathf.Max(0, value.y), Mathf.Max(0, value.z)); } }

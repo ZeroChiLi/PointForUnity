@@ -5,7 +5,7 @@ public class SpawnChickenTest : MonoBehaviour
 {
     public bool inEgde;
     public bool autoMove;
-    public PointAreaBase area;
+    public AreaBase area;
     public GameObject chickenPrefab;
     public int amount = 10;
     public float changeTime = 3f;

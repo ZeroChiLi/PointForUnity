@@ -3,17 +3,17 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-[CustomEditor(typeof(PointAnnulusArea))]
-public class PointAnnulusAreaEditor : Editor
+[CustomEditor(typeof(AnnulusArea),true)]
+public class AnnulusAreaEditor : Editor
 {
-    private PointAnnulusArea Target;
+    protected AnnulusArea Target;
+    protected Matrix4x4 mOld;
+    protected Color colorOld;
     private float scaleValue;
-    private Matrix4x4 mOld;
-    private Color colorOld;
 
-    private void OnEnable()
+    protected void OnEnable()
     {
-        Target = target as PointAnnulusArea;
+        Target = target as AnnulusArea;
     }
 
     public override void OnInspectorGUI()
@@ -25,7 +25,7 @@ public class PointAnnulusAreaEditor : Editor
         SceneView.RepaintAll();
     }
 
-    private void GetProperties()
+    protected void GetProperties()
     {
         Target.MinRadius = EditorGUILayout.FloatField("MinRadius", Target.MinRadius);
         Target.MaxRadius = EditorGUILayout.FloatField("MaxRadius", Target.MaxRadius);
@@ -48,18 +48,16 @@ public class PointAnnulusAreaEditor : Editor
     /// </summary>
     private void DrawAnnulusArea()
     {
-        Handles.color = Target.appearance.outerCircleColor;
+        Handles.color = Target.appearance.outerColor;
         Handles.DrawSolidArc(Target.transform.position, Target.transform.up, Target.transform.right, -Target.angle, Target.MaxRadius);
-        //Handles.DrawSolidDisc(Target.transform.position, Target.transform.up, Target.MaxRadius);
-        Handles.color = Target.appearance.innerCircleColor;
-        //Handles.DrawSolidDisc(Target.transform.position, Target.transform.up, Target.MinRadius);
+        Handles.color = Target.appearance.innerColor;
         Handles.DrawSolidArc(Target.transform.position, Target.transform.up, Target.transform.right, -Target.angle, Target.MinRadius);
     }
 
     /// <summary>
     /// 绘制内外缩放控制
     /// </summary>
-    private void DrawMinMaxScaleHandle()
+    protected void DrawMinMaxScaleHandle()
     {
         scaleValue = DrawScaleHandle(Target.MinRadius, Target.appearance.innerEdgeColor, -Target.transform.right);
         if (EditorGUI.EndChangeCheck())
@@ -85,7 +83,7 @@ public class PointAnnulusAreaEditor : Editor
     /// <param name="color">颜色</param>
     /// <param name="direction">方向</param>
     /// <returns>返回缩放值</returns>
-    private float DrawScaleHandle(float radius, Color color, Vector3 direction)
+    protected float DrawScaleHandle(float radius, Color color, Vector3 direction)
     {
         Handles.color = color;
         Handles.CircleHandleCap(0, Target.transform.position, Quaternion.LookRotation(Target.transform.up), radius, EventType.Repaint);

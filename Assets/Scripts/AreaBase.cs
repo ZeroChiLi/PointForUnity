@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class PointAreaBase : MonoBehaviour
+public abstract class AreaBase : MonoBehaviour
 {
     public enum OrientationType { Same, Rule, Random, RandomX, RandomY, RandomZ, }
     public OrientationType orientationType;

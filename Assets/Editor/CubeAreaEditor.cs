@@ -2,17 +2,17 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(PointCubeArea))]
-public class PointCubeAreaEditor : Editor 
+[CustomEditor(typeof(CubeArea))]
+public class CubeAreaEditor : Editor 
 {
-    private PointCubeArea Target;
+    private CubeArea Target;
 
     static private Matrix4x4 mOld;
     static private Color colorOld;
 
     private void OnEnable()
     {
-        Target = target as PointCubeArea;
+        Target = target as CubeArea;
     }
 
     public override void OnInspectorGUI()
@@ -30,17 +30,17 @@ public class PointCubeAreaEditor : Editor
     }
 
     [DrawGizmo(GizmoType.Selected | GizmoType.Active)]
-    static void RenderBoxGizmo(PointCubeArea cubeArea, GizmoType gizmoType)
+    static void RenderBoxGizmo(CubeArea cubeArea, GizmoType gizmoType)
     {
         colorOld = Gizmos.color;
         mOld = Gizmos.matrix;
 
         Gizmos.matrix = cubeArea.transform.localToWorldMatrix;
 
-        Gizmos.color = cubeArea.enabled ? cubeArea.apperance.surfaceColor : Color.clear;
+        Gizmos.color = cubeArea.enabled ? cubeArea.appearance.surfaceColor : Color.clear;
         Gizmos.DrawCube(Vector3.zero, cubeArea.Size);
 
-        Gizmos.color = cubeArea.apperance.edgeColor;
+        Gizmos.color = cubeArea.appearance.edgeColor;
         Gizmos.DrawWireCube(Vector3.zero, cubeArea.Size);
 
         Gizmos.matrix = mOld;
