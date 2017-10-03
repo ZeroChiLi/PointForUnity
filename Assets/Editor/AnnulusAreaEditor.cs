@@ -31,7 +31,7 @@ public class AnnulusAreaEditor : Editor
         Target.MaxRadius = EditorGUILayout.FloatField("MaxRadius", Target.MaxRadius);
     }
 
-    private void OnSceneGUI()
+    protected void OnSceneGUI()
     {
         mOld = Handles.matrix;
         colorOld = Handles.color;

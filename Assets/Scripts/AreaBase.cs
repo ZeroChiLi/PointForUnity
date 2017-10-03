@@ -45,12 +45,20 @@ public abstract class AreaBase : MonoBehaviour
     /// <summary>
     /// 获取区域内随机的点
     /// </summary>
-    public abstract Point GetRandomPointInArea();
+    public virtual Point GetRandomPointInArea()
+    {
+        Vector3 pos = GetRandomPositionInArea();
+        return new Point(pos, GetAngleByPosition(pos));
+    }
 
     /// <summary>
     /// 获取边缘上随机的点
     /// </summary>
-    public abstract Point GetRandomPointInEdge();
+    public virtual Point GetRandomPointInEdge()
+    {
+        Vector3 pos = GetRandomPositionInEdge();
+        return new Point(pos, GetAngleByPosition(pos));
+    }
 
     /// <summary>
     /// 获取世界空间下点的位置

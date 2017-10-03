@@ -57,18 +57,6 @@ public class CubeArea : AreaBase
         return Vector3.zero;
     }
 
-    public override Point GetRandomPointInArea()
-    {
-        Vector3 pos = GetRandomPositionInArea();
-        return new Point(pos, GetAngleByPosition(pos));
-    }
-
-    public override Point GetRandomPointInEdge()
-    {
-        Vector3 pos = GetRandomPositionInEdge();
-        return new Point(pos, GetAngleByPosition(pos));
-    }
-
     /// <summary>
     /// 获取表面上随机的点
     /// </summary>
