@@ -1,6 +1,8 @@
 # PointForUnity
 A Convenient Tool For Unity, Can Be Used As Spawn Point Or Way Point,etc.
 
+>博客地址：http://blog.csdn.net/l773575310/article/details/78158924
+
 Unity 自制工具，方便标记出生点或巡逻点等功能。
 
 --- 
@@ -53,7 +55,7 @@ public class Point
 
 ### 实例1.在每个点同时作为出生点和巡逻点
 
-![](http://ox99tvy17.bkt.clouddn.com/g03.gif)
+![](http://ox99tvy17.bkt.clouddn.com/g03_new.gif)
 
 ```csharp
 
@@ -133,7 +135,7 @@ public class Point
 ![](http://ox99tvy17.bkt.clouddn.com/08.png)
 
 ### 实例2.环状区域中（或边缘）随机产生超载鸡们。
-![](http://ox99tvy17.bkt.clouddn.com/g07.gif)
+![](http://ox99tvy17.bkt.clouddn.com/g07_new.gif)
 
 ```csharp
     private void ResetChicken(ChickenManager c)
