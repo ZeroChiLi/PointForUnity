@@ -138,10 +138,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orientationType: 2
   orientationEulerAngle: {x: 0, y: 180, z: 0}
-  apperance:
+  appearance:
     edgeColor: {r: 1, g: 1, b: 1, a: 1}
     surfaceColor: {r: 1, g: 1, b: 1, a: 0.5}
-  size: {x: 10, y: 10, z: 10}
+  size: {x: 10, y: 15.24, z: 10}
 --- !u!4 &315075872
 Transform:
   m_ObjectHideFlags: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inEgde: 0
-  autoMove: 0
+  autoMove: 1
   area: {fileID: 315075871}
   chickenPrefab: {fileID: 1069252933942776, guid: 7745835f82594b747abc0b37008a94b1,
     type: 2}
