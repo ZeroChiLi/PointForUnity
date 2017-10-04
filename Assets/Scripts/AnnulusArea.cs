@@ -22,11 +22,10 @@ public class AnnulusArea : AreaBase
     public float MinRadius { get { return minRadius; } set { minRadius = Mathf.Max(0, Mathf.Min(value, maxRadius)); } }
     public float MaxRadius { get { return maxRadius; } set { maxRadius = Mathf.Max(value, minRadius); } }
 
-
     public Vector3 GetRandomPositionByRadius(float radius)
     {
         float f = Random.Range(0, angle) * Mathf.PI / 180;
-        return new Vector3(radius * Mathf.Cos(f), 0, radius * Mathf.Sin(f));
+        return GetWorldSpacePosition(new Vector3(radius * Mathf.Cos(f), 0, radius * Mathf.Sin(f)));
     }
 
     public override Vector3 GetRandomPositionInArea()
@@ -47,11 +46,16 @@ public class AnnulusArea : AreaBase
     public virtual Point GetRandomPointInMinEdge()
     {
         Vector3 pos = GetRandomPositionInMinEdge();
-        return new Point(pos, GetAngleByPosition(pos));
+        return new Point(pos,GetAngleByPosition(GetLocalSpacePosition(pos)));
     }
 
-    public override Vector3 GetWorldSpacePosition(Point p)
+    protected override Vector3 GetWorldSpacePosition(Vector3 pos)
     {
-        return transform.rotation * p.position + transform.position;
+        return transform.rotation * pos + transform.position;
+    }
+
+    protected override Vector3 GetLocalSpacePosition(Vector3 pos)
+    {
+        return Quaternion.Inverse(transform.rotation) * (pos - transform.position);
     }
 }

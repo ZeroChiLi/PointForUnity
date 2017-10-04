@@ -361,7 +361,7 @@ Transform:
   m_GameObject: {fileID: 419135808}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -477,8 +477,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 916915544}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -6}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: -3}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 1925942291}
   - {fileID: 1427501286}
@@ -896,26 +896,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d88035c9cf727344858d9d139f7dbe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  apperance:
+  appearance:
     keepGizoms: 1
     useScreenSize: 0
-    selectedColor: {r: 0.9044118, g: 0.5, b: 1, a: 1}
-    pointSize: 0.42
-    pointColor: {r: 0.57612455, g: 0.2794118, b: 1, a: 1}
-    indexFontSize: 20
-    indexFontColor: {r: 0, g: 0, b: 0, a: 1}
-    axisLength: 3
-    focusSize: 50
+    selectedColor: {r: 1, g: 0, b: 0.8823528, a: 1}
+    pointSize: 0.22
+    pointColor: {r: 0.5019608, g: 0, b: 1, a: 1}
+    indexFontSize: 22
+    indexFontColor: {r: 1, g: 1, b: 1, a: 1}
+    axisLength: 1.93
+    focusSize: 22.2
   currentIndex: 0
   looped: 1
   points:
-  - position: {x: 12.907723, y: 0, z: -2.479185}
+  - position: {x: 6.5519786, y: 0, z: -2.479185}
     eulerAngles: {x: 0, y: -86.21, z: 0}
-  - position: {x: 0.048005104, y: 0, z: -13.031222}
-    eulerAngles: {x: 0, y: 12.29, z: 0}
-  - position: {x: -10.817728, y: 0, z: 2.257623}
+  - position: {x: -0.1359756, y: 0, z: -6.651224}
+    eulerAngles: {x: -0, y: 341.61923, z: 0}
+  - position: {x: -5.942938, y: 0, z: 2.257623}
     eulerAngles: {x: 0, y: 102.71, z: 0}
-  - position: {x: 5.4352317, y: 0, z: 6.539459}
+  - position: {x: 4.0159903, y: 0, z: 5.2436295}
     eulerAngles: {x: 0, y: -124.47, z: 0}
 --- !u!4 &1566979765
 Transform:
@@ -1100,13 +1100,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1771926507}
-  m_LocalRotation: {x: 0.43523106, y: 0, z: 0, w: 0.9003188}
-  m_LocalPosition: {x: 0, y: 60, z: -52.7}
+  m_LocalRotation: {x: 0.4890019, y: 0, z: 0, w: 0.87228274}
+  m_LocalPosition: {x: 0, y: 30, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 51.6, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 58.55, y: 0, z: 0}
 --- !u!1 &1802672709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1379,8 +1379,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   points: {fileID: 1566979764}
   prefab: {fileID: 1069252933942776, guid: 7745835f82594b747abc0b37008a94b1, type: 2}
-  isRandom: 1
-  changeNextWayPointTime: 5
+  isRandom: 0
+  changeNextWayPointTime: 3
 --- !u!4 &1985262648
 Transform:
   m_ObjectHideFlags: 0

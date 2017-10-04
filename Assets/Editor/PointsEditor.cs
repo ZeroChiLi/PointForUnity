@@ -73,7 +73,7 @@ internal class PointsEditor : Editor
         {
             pointList.index = index;
             SceneView.lastActiveSceneView.pivot = Target.transform.rotation * Target[index].position;
-            SceneView.lastActiveSceneView.size = Target.apperance.focusSize * Target.apperance.pointSize;
+            SceneView.lastActiveSceneView.size = Target.appearance.focusSize * Target.appearance.pointSize;
             SceneView.lastActiveSceneView.Repaint();
         }
 
@@ -102,7 +102,7 @@ internal class PointsEditor : Editor
 
         Matrix4x4 mOld = Handles.matrix;
         Color colorOld = Handles.color;
-        Handles.matrix = Target.transform.localToWorldMatrix;
+        Handles.matrix = Matrix4x4.Translate(Target.transform.position) * Matrix4x4.Rotate(Target.transform.rotation);
 
         for (int i = 0; i < Target.Count; ++i)
             DrawSelectionHandle(i);
@@ -122,10 +122,10 @@ internal class PointsEditor : Editor
     private float GetPointSize(Vector3 position)
     {
         float pointSize;
-        if (Target.apperance.useScreenSize)
-            pointSize = HandleUtility.GetHandleSize(position) * Target.apperance.pointSize / 2f;
+        if (Target.appearance.useScreenSize)
+            pointSize = HandleUtility.GetHandleSize(position) * Target.appearance.pointSize / 2f;
         else
-            pointSize = Target.apperance.pointSize * 4f;
+            pointSize = Target.appearance.pointSize * 4f;
         return pointSize;
     }
 
@@ -139,7 +139,7 @@ internal class PointsEditor : Editor
             return;
         Vector3 pos = Target[i].position;
 
-        Handles.color = Target.apperance.pointColor;
+        Handles.color = Target.appearance.pointColor;
         if (Handles.Button(pos, Quaternion.identity, GetPointSize(pos), GetPointSize(pos), Handles.SphereHandleCap) && pointList.index != i)
         {
             pointList.index = i;
@@ -152,8 +152,8 @@ internal class PointsEditor : Editor
 
         Handles.BeginGUI();
         GUILayout.BeginArea(LabelRect(pos));
-        guiStyle.normal.textColor = Target.apperance.indexFontColor;
-        guiStyle.fontSize = Target.apperance.indexFontSize;
+        guiStyle.normal.textColor = Target.appearance.indexFontColor;
+        guiStyle.fontSize = Target.appearance.indexFontSize;
         GUILayout.Label(new GUIContent(i.ToString(), string.Format("Point {0}\nPosition: {1}\nRotation: {2}", i, Target[i].position, Target[i].eulerAngles)), guiStyle);
         GUILayout.EndArea();
         Handles.EndGUI();
@@ -181,10 +181,10 @@ internal class PointsEditor : Editor
     private void DrawPointAxisLine(int i, Vector3 dir, Color color)
     {
         Handles.color = color;
-        if (Target.apperance.useScreenSize)
-            Handles.DrawLine(Target[i].position, Target[i].position + Target[i].rotation * dir * Target.apperance.axisLength * GetPointSize(Target[i].position));
+        if (Target.appearance.useScreenSize)
+            Handles.DrawLine(Target[i].position, Target[i].position + Target[i].rotation * dir * Target.appearance.axisLength * GetPointSize(Target[i].position));
         else
-            Handles.DrawLine(Target[i].position, Target[i].position + Target[i].rotation * dir * Target.apperance.axisLength);
+            Handles.DrawLine(Target[i].position, Target[i].position + Target[i].rotation * dir * Target.appearance.axisLength);
 
     }
 
@@ -197,7 +197,7 @@ internal class PointsEditor : Editor
     {
         if (type != Tool.Move && type != Tool.Rotate)
             return;
-        Handles.color = Target.apperance.selectedColor;
+        Handles.color = Target.appearance.selectedColor;
         Point point = Target[i];
         EditorGUI.BeginChangeCheck();
         Quaternion rotation = (Tools.pivotRotation == PivotRotation.Local) ? Quaternion.identity : Quaternion.Inverse(Target.transform.rotation);

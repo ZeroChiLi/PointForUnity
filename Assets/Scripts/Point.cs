@@ -10,7 +10,5 @@ public class Point
     public Point() { }
     public Point(Vector3 position, Quaternion rotation) { this.position = position; this.rotation = rotation; }
     public Point(Vector3 position, Vector3 eulerAngles) { this.position = position; this.eulerAngles = eulerAngles; }
-
-
 }
 

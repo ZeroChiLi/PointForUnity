@@ -8,6 +8,26 @@ public class SphereAreaEditor : AnnulusAreaEditor
     static private Matrix4x4 oldGizmoMatrix;
     static private Color oldGizmoColor;
 
+    public override void OnInspectorGUI()
+    {
+        serializedObject.Update();
+        DrawPropertiesExcluding(serializedObject, "m_Script","angle");
+        GetProperties();
+        serializedObject.ApplyModifiedProperties();
+        SceneView.RepaintAll();
+    }
+
+    protected new void OnSceneGUI()
+    {
+        mOld = Handles.matrix;
+        colorOld = Handles.color;
+
+        DrawMinMaxScaleHandle();
+
+        Handles.color = colorOld;
+        Handles.matrix = mOld;
+    }
+
     [DrawGizmo(GizmoType.Selected | GizmoType.Active)]
     static void RenderBoxGizmo(SphereArea sphereArea, GizmoType gizmoType)
     {

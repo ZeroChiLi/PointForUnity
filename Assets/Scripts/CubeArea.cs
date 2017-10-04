@@ -22,21 +22,25 @@ public class CubeArea : AreaBase
 
     public override Vector3 GetRandomPositionInArea()
     {
-        return new Vector3(RandomUtility.Extents(Extents.x), RandomUtility.Extents(Extents.y), RandomUtility.Extents(Extents.z));
+        return GetWorldSpacePosition(new Vector3(RandomUtility.Extents(Extents.x), RandomUtility.Extents(Extents.y), RandomUtility.Extents(Extents.z)));
     }
 
     public override Vector3 GetRandomPositionInEdge()
     {
+        Vector3 pos = Vector3.zero;
         switch (RandomUtility.Index(ActualSize.x, ActualSize.y, ActualSize.z))
         {
             case 0:
-                return new Vector3(RandomUtility.Extents(Extents.x), RandomUtility.sign * Extents.y, RandomUtility.sign * Extents.z);
+                pos =  new Vector3(RandomUtility.Extents(Extents.x), RandomUtility.sign * Extents.y, RandomUtility.sign * Extents.z);
+                break;
             case 1:
-                return new Vector3(RandomUtility.sign * Extents.x, RandomUtility.Extents(Extents.y), RandomUtility.sign * Extents.z);
+                pos = new Vector3(RandomUtility.sign * Extents.x, RandomUtility.Extents(Extents.y), RandomUtility.sign * Extents.z);
+                break;
             case 2:
-                return new Vector3(RandomUtility.sign * Extents.x, RandomUtility.sign * Extents.y, RandomUtility.Extents(Extents.z));
+                pos = new Vector3(RandomUtility.sign * Extents.x, RandomUtility.sign * Extents.y, RandomUtility.Extents(Extents.z));
+                break;
         }
-        return Vector3.zero;
+        return GetWorldSpacePosition(pos);
     }
 
     /// <summary>
@@ -45,16 +49,20 @@ public class CubeArea : AreaBase
     public Vector3 GetRandomPositionInSurface()
     {
         Vector3 actualSize = ActualSize;
+        Vector3 pos = Vector3.zero;
         switch (RandomUtility.Index(actualSize.y * actualSize.z, actualSize.x * actualSize.z, actualSize.x * actualSize.y))
         {
             case 0:
-                return new Vector3(RandomUtility.sign * Extents.x, RandomUtility.Extents(Extents.y), RandomUtility.Extents(Extents.z));
+                pos = new Vector3(RandomUtility.sign * Extents.x, RandomUtility.Extents(Extents.y), RandomUtility.Extents(Extents.z));
+                break;
             case 1:
-                return new Vector3(RandomUtility.Extents(Extents.x), RandomUtility.sign * Extents.y, RandomUtility.Extents(Extents.z));
+                pos = new Vector3(RandomUtility.Extents(Extents.x), RandomUtility.sign * Extents.y, RandomUtility.Extents(Extents.z));
+                break;
             case 2:
-                return new Vector3(RandomUtility.Extents(Extents.x), RandomUtility.Extents(Extents.z), RandomUtility.sign * Extents.z);
+                pos = new Vector3(RandomUtility.Extents(Extents.x), RandomUtility.Extents(Extents.z), RandomUtility.sign * Extents.z);
+                break;
         }
-        return Vector3.zero;
+        return GetWorldSpacePosition(pos);
     }
 
     /// <summary>
@@ -63,7 +71,7 @@ public class CubeArea : AreaBase
     public Point GetRandomPointInSurface()
     {
         Vector3 pos = GetRandomPositionInSurface();
-        return new Point(pos, GetAngleByPosition(pos));
+        return new Point(pos, GetAngleByPosition(GetLocalSpacePosition(pos)));
     }
 
 }

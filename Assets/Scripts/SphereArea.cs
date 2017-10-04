@@ -5,23 +5,23 @@ public class SphereArea : AnnulusArea
 {
     public override Vector3 GetRandomPositionInArea()
     {
-        return Random.insideUnitSphere * Random.Range(MinRadius, MaxRadius);
+        return GetWorldSpacePosition(Random.onUnitSphere * Random.Range(MinRadius, MaxRadius));
     }
 
     public override Vector3 GetRandomPositionInEdge()
     {
-        return Random.onUnitSphere * MaxRadius;
+        return GetWorldSpacePosition(Random.onUnitSphere * MaxRadius);
     }
 
     public override Vector3 GetRandomPositionInMinEdge()
     {
-        return Random.onUnitSphere * MinRadius;
+        return GetWorldSpacePosition(Random.onUnitSphere * MinRadius);
     }
 
     public override Point GetRandomPointInMinEdge()
     {
         Vector3 pos = GetRandomPositionInMinEdge();
-        return new Point(pos, GetAngleByPosition(pos));
+        return new Point(pos, GetAngleByPosition(GetLocalSpacePosition(pos)));
     }
 
 }

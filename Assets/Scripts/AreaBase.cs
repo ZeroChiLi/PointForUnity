@@ -10,26 +10,35 @@ public abstract class AreaBase : MonoBehaviour
     /// <summary>
     /// 通过位置偏移量计算旋转角
     /// </summary>
-    /// <param name="offset">偏移量</param>
-    public virtual Quaternion GetAngleByPosition(Vector3 offset)
+    /// <param name="localPos">相对位置</param>
+    public virtual Quaternion GetAngleByPosition(Vector3 localPos)
     {
+        Quaternion angle = Quaternion.identity;
         switch (orientationType)
         {
             case OrientationType.Same:
-                return orientationAngle;
+                angle = orientationAngle;
+                break;
             case OrientationType.Rule:
-                return orientationAngle * Quaternion.LookRotation(offset);
+                angle = orientationAngle * Quaternion.LookRotation(localPos);
+                break;
             case OrientationType.Random:
-                return Random.rotation;
+                angle = Random.rotation;
+                break;
             case OrientationType.RandomX:
-                return Quaternion.Euler(Random.Range(0f, 360f), 0, 0);
+                angle = Quaternion.Euler(Random.Range(0f, 360f), 0, 0);
+                break;
             case OrientationType.RandomY:
-                return Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+                angle = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+                break;
             case OrientationType.RandomZ:
-                return Quaternion.Euler(0, 0, Random.Range(0f, 360f));
+                angle = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
+                break;
+            default:
+                Debug.LogError("Get Error Qrientation.");
+                break;
         }
-        Debug.LogError("Get Error Qrientation.");
-        return Quaternion.identity;
+        return GetWorldSpaceRotation(angle);
     }
 
     /// <summary>
@@ -48,7 +57,7 @@ public abstract class AreaBase : MonoBehaviour
     public virtual Point GetRandomPointInArea()
     {
         Vector3 pos = GetRandomPositionInArea();
-        return new Point(pos, GetAngleByPosition(pos));
+        return new Point(pos, GetAngleByPosition(GetLocalSpacePosition(pos)));
     }
 
     /// <summary>
@@ -57,30 +66,31 @@ public abstract class AreaBase : MonoBehaviour
     public virtual Point GetRandomPointInEdge()
     {
         Vector3 pos = GetRandomPositionInEdge();
-        return new Point(pos, GetAngleByPosition(pos));
+        return new Point(pos, GetAngleByPosition(GetLocalSpacePosition(pos)));
     }
 
     /// <summary>
     /// 获取世界空间下点的位置
     /// </summary>
-    public virtual Vector3 GetWorldSpacePosition(Point p)
+    protected virtual Vector3 GetWorldSpacePosition(Vector3 pos)
     {
-        return transform.TransformPoint(p.position);
+        return transform.TransformPoint(pos);
+    }
+
+    /// <summary>
+    /// 获取本地空间下点的位置
+    /// </summary>
+    protected virtual Vector3 GetLocalSpacePosition(Vector3 pos)
+    {
+        return transform.InverseTransformPoint(pos);
     }
 
     /// <summary>
     /// 获取世界空间下点的旋转
     /// </summary>
-    public virtual Quaternion GetWorldSpaceRotation(Point p)
+    protected virtual Quaternion GetWorldSpaceRotation(Quaternion rotation)
     {
-        return transform.rotation * p.rotation;
+        return transform.rotation * rotation;
     }
 
-    /// <summary>
-    /// 获取世界坐标下的点
-    /// </summary>
-    public virtual Point GetWorldSpacePoint(Point p)
-    {
-        return new Point(GetWorldSpacePosition(p), GetWorldSpaceRotation(p));
-    }
 }
