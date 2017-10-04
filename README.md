@@ -4,7 +4,7 @@ A Convenient Tool For Unity, Can Be Used As Spawn Point Or Way Point,etc.
 Unity 自制工具，方便标记出生点或巡逻点等功能。
 
 --- 
-##Point（点）
+## Point（点）
 
 定义：只有位置和旋转角度两个属性的类对象。
 
@@ -24,17 +24,20 @@ public class Point
 ```
 
 ---
-##Points（点列表）
+## Points（点列表）
 
 ![](http://ox99tvy17.bkt.clouddn.com/02.png)
 
 ![](http://ox99tvy17.bkt.clouddn.com/g01.gif)
+
 直接点击Gizmos可以选中点列表，控制Appearance来更方便控制点的位置角度。
 
 ![](http://ox99tvy17.bkt.clouddn.com/g02.gif)
+
 点击按钮可以直接聚焦到对应的点。选择移动或旋转工具，可以直接在场景中控制点的位置已经旋转角度。
 
 ![](http://ox99tvy17.bkt.clouddn.com/g04.gif)
+
 可以控制transform的位置和旋转来改变所有点的位置。除了缩放对所有点没有任何影响。
 
 | 变量名 | 说明 |
@@ -87,14 +90,16 @@ public class Point
 ```
 
 ---
-##Annulus Area（环状区域）
+## Annulus Area（环状区域）
 
 ![](http://ox99tvy17.bkt.clouddn.com/03.png)
 
 ![](http://ox99tvy17.bkt.clouddn.com/g05.gif)
+
 可在场景直接拖拽缩放杆，来控制区域大小，控制angle来控制区域的扇形面积。
 
 ![](http://ox99tvy17.bkt.clouddn.com/g06.gif)
+
 同样可以控制Transform来控制区域的位置，同样不受缩放影响。
 
 
@@ -107,7 +112,7 @@ public class Point
 | MinRadius | 区域最小半径。 |
 | MaxRadius | 区域最大半径。 |
 
-###Qrientation Type
+### Qrientation Type
 
 1. Same，获取的点旋转角都相同。
 ![](http://ox99tvy17.bkt.clouddn.com/04.png)
@@ -117,8 +122,10 @@ public class Point
 
 	2.1. 角度为0，所有点相对圆心向外。
 ![](http://ox99tvy17.bkt.clouddn.com/05.png) 
+
 	2.2. y为180，所有点相对圆心向内。
 ![](http://ox99tvy17.bkt.clouddn.com/06.png)
+
 	2.3. y为90，所有点从上往下看是顺时针方向。
 ![](http://ox99tvy17.bkt.clouddn.com/07.png)
 
@@ -140,7 +147,8 @@ public class Point
 ```
 
 ---
-##Sphere Area（球状区域）
+## Sphere Area（球状区域）
+
 ![](http://ox99tvy17.bkt.clouddn.com/09.png)
 继承于Annulus Area，原理相同，但是不支持角度控制，因为光想想怎么绘制出被裁切的球体就觉得很麻烦。
 
@@ -148,11 +156,12 @@ public class Point
 ![](http://ox99tvy17.bkt.clouddn.com/g08.gif)
 
 ---
-##Cube Area （立方体区域）
+## Cube Area （立方体区域）
 ![](http://ox99tvy17.bkt.clouddn.com/10.png)
-这个更简单，只有一个区域范围控制。
 
+这个更简单，只有一个区域范围控制。
 ![](http://ox99tvy17.bkt.clouddn.com/g09.gif)
+
 同样可以通过transform改变位置旋转，而且支持修改缩放控制大小。
 
 ### 实例4.立方体区域中随机产生超载鸡们。
